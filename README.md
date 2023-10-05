@@ -18,7 +18,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão fe
 - [x] Interface amigável
 - [ ] Salvar filtros
 - [ ] Salvar em outros formatos(.csv etc)
-- [ ] Tarefa 5
 
 ## 💻 Pré-requisitos
 
