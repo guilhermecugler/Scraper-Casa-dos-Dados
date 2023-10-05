@@ -18,36 +18,43 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão fe
 - [x] Interface amigável
 - [ ] Salvar filtros
 - [ ] Salvar em outros formatos(.csv etc)
+- [ ] Gerar instalador
+- [ ] Gerar executável portável
 
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 * Você tem `Python 3.11` ou a versão mais recente instalada
-* Você tem uma máquina `<Windows 10>` ou superior
+* Você tem uma máquina `Windows 10` ou superior
 
-## 🚀 Instalando <ScraperCasaDosDados>
+## 🚀 Instalando
 
-Para instalar o <ScraperCasaDosDados>, siga estas etapas:
+Para instalar, siga estas etapas:
 
 Windows:
 ```
+1. Clone este repositório:
 git clone https://github.com/guilhermecugler/Scraper-Casa-dos-Dados.git
+
+2. Navegue até a pasta clonada
+
+3. Instale as dependências:
 pip install -r .\requirements.txt
 ```
 
-## ☕ Usando <ScraperCasaDosDados>
+## ☕ Usando
 
-Para usar <ScraperCasaDosDados>, siga estas etapas:
+Para usar, siga estas etapas:
 
 ```
-Vá até a pasta do projeto onde contém o casadosdados.py
-Execute com: python .\casadosdados.py
+1. Vá até a pasta do projeto onde contém o casadosdados.py
+2. Execute com: python .\casadosdados.py
 ```
 
-## 📫 Contribuindo para <ScraperCasaDosDados>
+## 📫 Contribuindo
 
-Para contribuir com <ScraperCasaDosDados>, siga estas etapas:
+Para contribuir, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
