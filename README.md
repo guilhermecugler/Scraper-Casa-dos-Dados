@@ -24,11 +24,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão fe
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 * Você tem `Python 3.11` ou a versão mais recente instalada
-* Você tem uma máquina `<Windows 10 ou superiro>`
+* Você tem uma máquina `<Windows 10>` ou superior
 
-## 🚀 Instalando <nome_do_projeto>
+## 🚀 Instalando <Scraper Casa dos Dados>
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
+Para instalar o <Scraper Casa dos Dados>, siga estas etapas:
 
 Windows:
 ```
@@ -36,23 +36,23 @@ git clone https://github.com/guilhermecugler/Scraper-Casa-dos-Dados.git
 pip install -r .\requirements.txt
 ```
 
-## ☕ Usando <nome_do_projeto>
+## ☕ Usando <Scraper Casa dos Dados>
 
-Para usar <nome_do_projeto>, siga estas etapas:
+Para usar <Scraper Casa dos Dados>, siga estas etapas:
 
 ```
 Vá até a pasta do projeto onde contém o casadosdados.py
 Execute com: python .\casadosdados.py
 ```
 
-## 📫 Contribuindo para <nome_do_projeto>
+## 📫 Contribuindo para <Scraper Casa dos Dados>
 
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+Para contribuir com <Scraper Casa dos Dados>, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
 3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+4. Envie para o branch original: `git push origin <Scraper Casa dos Dados> / <local>`
 5. Crie a solicitação de pull.
 
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
