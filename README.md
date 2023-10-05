@@ -1,4 +1,4 @@
-# Scraper Casa dps Dados
+# Scraper Casa dos Dados
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
@@ -26,7 +26,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você tem `Python 3.11` ou a versão mais recente instalada
 * Você tem uma máquina `<Windows 10>` ou superior
 
-## 🚀 Instalando <Scraper Casa dos Dados>
+## 🚀 Instalando <ScraperCasaDosDados>
 
 Para instalar o <ScraperCasaDosDados>, siga estas etapas:
 
