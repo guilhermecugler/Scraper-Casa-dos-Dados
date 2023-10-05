@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Description: Scraper com interface utilizando CustomTkinter do site casadosdados.com.br
+Author: Guilherme Cugler
+"""
+
 import asyncio
 import ctypes
 import json
