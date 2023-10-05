@@ -325,52 +325,6 @@ class Functions:
 
             results = await asyncio.gather(*tasks)
 
-            # for task in asyncio.as_completed(tasks):
-            #     compl = await task
-            #     app.progress_bar_update(progress_step)
-            #     progress_step += iter_step
-            #     # print(f"loop {progress_step }")
-            #     print(f"Task completed: {compl}") 
-            # print(f'Both tasks done: {all(tasks)}')
-            # print("fim")
-
-            # print(len(results))
-
-            # for cnpj in cnpj_t:
-            #     print(cnpj)
-
-    # asyncio.run(get_list_cnpj_numbers())
-
-    # asyncio.run(main())
-
-
-    # save_df_list_to_xlsx(file_name='ResultadoAsync.xlsx', list_df_all_cnpj_details=list_df_all_cnpj_details)
-    # organize_sheet(file_name='ResultadoAsync.xlsx')
-    # print("--- %s seconds ---" % (time.time() - start_time))
-class MyRadiobuttonFrame(customtkinter.CTkFrame):
-    def __init__(self, master, title, values):
-        super().__init__(master)
-        self.grid_columnconfigure(0, weight=1)
-        self.values = values
-        self.title = title
-        self.radiobuttons = []
-        self.variable = customtkinter.StringVar(value="")
-
-        self.title = customtkinter.CTkLabel(self, text=self.title, fg_color="gray30", corner_radius=6)
-        self.title.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="ew")
-
-        for i, value in enumerate(self.values):
-            radiobutton = customtkinter.CTkRadioButton(self, text=value, value=value, variable=self.variable)
-            radiobutton.grid(row=i + 1, column=0, padx=10, pady=(10, 0), sticky="w")
-            self.radiobuttons.append(radiobutton)
-
-    def get(self):
-        return self.variable.get()
-
-    def set(self, value):
-        self.variable.set(value)
-
-
 
 class FiltersFrame(customtkinter.CTkFrame):
     def __init__(self, master, title):
@@ -428,14 +382,6 @@ class FiltersFrame(customtkinter.CTkFrame):
 
             self.entry_data_final.delete(0, "end")
             self.entry_data_final.insert(0, new_text)
-
-        # def combobox_cnaes_callback(choice):
-        #     print('combobox dropdown clicked:', choice)
-        #     # print(cnaes)
-        #     for i, cnae in enumerate(cnaes):
-        #         if cnae['name'] == choice:
-        #             combobox_cnae_var.set(cnaes[i]['code'])
-                    # print(f"cnae selected code: {combobox_cnae_var.get()}")
 
         self.check_somente_mei_var = customtkinter.BooleanVar(value=False)
         self.check_excluir_mei_var = customtkinter.BooleanVar(value=False)
@@ -585,34 +531,6 @@ class FiltersFrame(customtkinter.CTkFrame):
         self.entry_data_final = customtkinter.CTkEntry(self, placeholder_text='Fim - 01/12/2023')
         self.entry_data_final.bind("<KeyRelease>", command=format_date_final)
         self.entry_data_final.grid(row=7, column=2, padx=10, pady=10, sticky='ew')
-        # self.coluna = 0
-        # self.linha = 0
-
-        # self.quantidade_checks = 0
-        # for i, value in enumerate(self.values):
-        #     self.quantidade_checks = self.quantidade_checks+1
-        #     if self.quantidade_checks <= 3 : self.coluna = 0
-        #     elif self.quantidade_checks <= 4 : self.coluna = 1
-        #     elif self.quantidade_checks >= 7 : self.coluna = 2
-
-
-        #     if i <= 2 : self.linha = i
-        #     elif i <= 5 : self.linha = i - 3
-        #     elif i <= 8 : self.linha = i - 6
-            
-        #     checkbox = customtkinter.CTkCheckBox(self, text=value)
-
-        #     checkbox.grid(row=self.linha+1, column=self.coluna, padx=20, pady=10, sticky='nsew')
-        #     self.checkboxes.append(checkbox)
-        
-        
-
-    # def get(self):
-    #     checked_checkboxes = []
-    #     for checkbox in self.checkboxes:
-    #         if checkbox.get() == 1:
-    #             checked_checkboxes.append(checkbox.cget("text"))
-    #     return checked_checkboxes
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -622,10 +540,9 @@ class App(customtkinter.CTk):
         self.height = 650   # Height
 
 
-        screen_width = self.winfo_screenwidth()  # Width of the screen
-        screen_height = self.winfo_screenheight()   # Height of the screen
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight() 
 
-        # Calculate Starting X and Y coordinates for Window
         x = (screen_width / 2) - (self.width / 2)
         y = (screen_height / 2) - (self.height / 2)
 
@@ -645,45 +562,27 @@ class App(customtkinter.CTk):
         self.home_image = customtkinter.CTkImage(light_image=Image.open(os.path.join(image_path, "logo_casa_dos_dados_light.png")),
                                                  dark_image=Image.open(os.path.join(image_path, "logo_casa_dos_dados_dark.png")), size=(500, 56))
         self.home_image_label = customtkinter.CTkLabel(self, text="", image=self.home_image)
-        
         self.home_image_label.grid(row=0, column=0, padx=10, pady=(50, 10), sticky="ew", columnspan=2)
 
         self.filters_frame = FiltersFrame(self, "Filtros")
-        # self.filters_frame.configure(fg_color="transparent")
         self.filters_frame.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nsew", columnspan="2")
-        # self.radiobutton_frame = MyRadiobuttonFrame(self, "Options", values=["option 1", "option 2"])
-        # self.radiobutton_frame.grid(row=0, column=1, padx=(0, 10), pady=(10, 0), sticky="nsew")
-        # self.label_type_file = customtkinter.CTkLabel(self, text="Tipo de arquivo:")
-        # self.label_type_file.grid(row=3, column=0, padx=10, pady=10, sticky="w")
-        
 
-        # self.radio_button_planilha = customtkinter.CTkRadioButton(self, text="Planilha", variable=self.radio_var, value=1)
-        # self.radio_button_planilha.grid(row=4, column=0, padx=10, pady=0, sticky="w")
-
-        # self.radio_button_csv = customtkinter.CTkRadioButton(self, text="CSV",  variable=self.radio_var, value=2)
-        # self.radio_button_csv.grid(row=4, column=1, padx=10, pady=0, sticky="w")
 
         self.button_buscar_empresas = customtkinter.CTkButton(self, text="Buscar Empresas", command=self.button_buscar_empresas_callback)
         self.button_buscar_empresas.grid(row=5, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
-
 
         self.progress_bar = customtkinter.CTkProgressBar(self, orientation='horizontal')
         self.progress_bar.grid(row=6, column=0, padx=10, pady=20, sticky="ew", columnspan=2)
         self.progress_bar.set(0)
         
-
         self.appearance_mode_menu = customtkinter.CTkOptionMenu(self, values=["Sistema", "Escuro", "Claro"],
                                                                 command=self.change_appearance_mode_event)
-        
         self.appearance_mode_menu.grid(row=7, column=0, padx=10, pady=20, sticky="ws")
-
 
 
     def progress_bar_update(self, step):
         self.progress_bar.set(step)
         self.update_idletasks()
-    
-
 
     def button_buscar_empresas_callback(self):
         self.button_buscar_empresas.configure(state='disabled')
@@ -725,9 +624,7 @@ class App(customtkinter.CTk):
             self.button_buscar_empresas.configure(state='normal')
             return
 
-
         self.progress_bar.set(0)
-        
         
         def buscar():
             start_time = time.time()
@@ -745,13 +642,7 @@ class App(customtkinter.CTk):
             self.button_buscar_empresas.configure(state='normal')
             print("--- %s seconds ---" % (time.time() - start_time))
 
-
-
         start_thread(buscar)
-
-
-        
-
         
     def button_callback2(self):
         functions = Functions(self)
@@ -788,15 +679,12 @@ class App(customtkinter.CTk):
         
         print(functions.json_filters)
         
-        # print("filters_frame:", self.filters_frame.get())
-
     def change_appearance_mode_event(self, new_appearance_mode):
         if new_appearance_mode == "Escuro": new_appearance_mode = "Dark"
         if new_appearance_mode == "Claro": new_appearance_mode = "Light"
         if new_appearance_mode == "Sistema": new_appearance_mode = "System"
 
         customtkinter.set_appearance_mode(new_appearance_mode)
-
 
 app = App()
 app.change_appearance_mode_event('System')
