@@ -17,7 +17,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão fe
 - [x] Requests assíncrono
 - [x] Interface amigável
 - [ ] Salvar filtros
-- [ ] Salvar em outros formatos(.csv etc)
+- [x] Salvar em outros formatos(.csv etc)
 - [ ] Gerar instalador
 - [ ] Gerar executável portável
 
