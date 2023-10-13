@@ -31,6 +31,7 @@ from openpyxl.styles.alignment import Alignment
 from openpyxl.utils import get_column_letter
 from PIL import Image
 from sheet2dict import Worksheet
+from tkinter import filedialog as fd
 
 
 def start_thread(function_name):
@@ -123,7 +124,13 @@ class Functions:
             return 0
 
         return pages_count
+    
+    def get_save_folder(self):
 
+        directory = fd.askdirectory(
+            title='Selecionar pasta'
+        )
+        return directory
 
     async def search_filters_return_list_cnpj_numbers(self, json_filters, page_number):
             json_filters.update({'page': page_number})
@@ -316,6 +323,9 @@ class Functions:
     async def main(self):
         # pages_count = get_page_count(json_filters)
         print('Iniciando busca de detalhes')
+        if self.list_cnpj_numbers == 0:
+            print('Nenhuma empresa encontrada')
+            return 
         global iter_step
         iter_step  = 1 / len(self.list_cnpj_numbers)
 
@@ -570,23 +580,60 @@ class App(customtkinter.CTk):
         self.home_image = customtkinter.CTkImage(light_image=Image.open(os.path.join(image_path, "logo_casa_dos_dados_light.png")),
                                                  dark_image=Image.open(os.path.join(image_path, "logo_casa_dos_dados_dark.png")), size=(500, 56))
         self.home_image_label = customtkinter.CTkLabel(self, text="", image=self.home_image)
-        self.home_image_label.grid(row=0, column=0, padx=10, pady=(50, 10), sticky="ew", columnspan=2)
+        self.home_image_label.grid(row=0, column=0, padx=10, pady=(50, 10), sticky="ew", columnspan=4)
 
         self.filters_frame = FiltersFrame(self, "Filtros")
-        self.filters_frame.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nsew", columnspan="2")
+        self.filters_frame.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nsew", columnspan=4)
 
 
         self.button_buscar_empresas = customtkinter.CTkButton(self, text="Buscar Empresas", command=self.button_buscar_empresas_callback)
-        self.button_buscar_empresas.grid(row=5, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
+        self.button_buscar_empresas.grid(row=5, column=0, padx=10, pady=10, sticky="ew", columnspan=4)
 
         self.progress_bar = customtkinter.CTkProgressBar(self, orientation='horizontal')
-        self.progress_bar.grid(row=6, column=0, padx=10, pady=20, sticky="ew", columnspan=2)
+        self.progress_bar.grid(row=6, column=0, padx=10, pady=(5, 5), sticky="ew", columnspan=4)
         self.progress_bar.set(0)
+
+        self.label_file_type = customtkinter.CTkLabel(self, text="Tipo de arquivo:")
+        self.label_file_type.grid(row=7, column=1)
+
+        self.file_type_var = customtkinter.StringVar(value='xlsx')
+
+        self.radio_xlsx = customtkinter.CTkRadioButton(self, text='Planilha', value='xlsx', variable=self.file_type_var, command=self.radiobutton_event, radiobutton_width=13, radiobutton_height=13)
+        self.radio_xlsx.grid(row=7, column=2, padx=0, pady=0, sticky="w")
+
+        self.radio_csv = customtkinter.CTkRadioButton(self, text='CSV', value='csv', variable=self.file_type_var, command=self.radiobutton_event, radiobutton_width=13, radiobutton_height=13)
+        self.radio_csv.grid(row=7, column=3, padx=0, pady=0, sticky="e")
+
+
+
+
+        self.file_entry_var = customtkinter.Variable(value=f"{datetime.strftime(datetime.now(), '%d-%m-%Y %H-%M')}.{self.file_type_var.get()}")
+
+
+        self.file_entry = customtkinter.CTkEntry(self, textvariable=self.file_entry_var)
+        self.file_entry.grid(row=8, column=1, padx=10, pady=20, sticky="ew")
+
+        self.button_select_folder = customtkinter.CTkButton(self, text="Selecionar Pasta", command=self.button_select_folder_callback)
+        self.button_select_folder.grid(row=8, column=2, padx=10, pady=10, sticky="ew", columnspan=2)
+
         
         self.appearance_mode_menu = customtkinter.CTkOptionMenu(self, values=["Sistema", "Escuro", "Claro"],
                                                                 command=self.change_appearance_mode_event)
-        self.appearance_mode_menu.grid(row=7, column=0, padx=10, pady=20, sticky="ws")
+        self.appearance_mode_menu.grid(row=8, column=0, padx=10, pady=20, sticky="ws")
 
+    
+
+
+    def button_select_folder_callback(self):
+        functions = Functions(self)
+        directory = functions.get_save_folder()
+        if directory == '':
+            return
+        file_location = f"{directory}/{datetime.strftime(datetime.now(), '%d-%m-%Y %H-%M')}.{self.file_type_var.get()}"
+        self.file_entry_var.set(file_location.replace('//', '/'))
+
+    def radiobutton_event(self):
+        self.file_entry_var.set(f"{datetime.strftime(datetime.now(), '%d-%m-%Y %H-%M')}.{self.file_type_var.get()}")
 
     def progress_bar_update(self, step):
         self.progress_bar.set(step)
@@ -611,8 +658,8 @@ class App(customtkinter.CTk):
                 }, 
             'range_query':{
                 'data_abertura':{
-                    'lte': None if self.filters_frame.entry_data_inicial.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_inicial.get(), '%d/%m/%Y'), '%d/%m/%Y'),
-                    'gte': None if self.filters_frame.entry_data_final.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_final.get(), '%d/%m/%Y'), '%d/%m/%Y'),
+                    'lte': None if self.filters_frame.entry_data_inicial.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_inicial.get(), '%d/%m/%Y'), '%Y-%m-%d'),
+                    'gte': None if self.filters_frame.entry_data_final.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_final.get(), '%d/%m/%Y'), '%Y-%m-%d'),
                 }
             },
             'extras':{
@@ -633,6 +680,7 @@ class App(customtkinter.CTk):
             return
 
         self.progress_bar.set(0)
+        print(functions.json_filters)
         
         def buscar():
             start_time = time.time()
@@ -644,14 +692,23 @@ class App(customtkinter.CTk):
                 return
             
             asyncio.run(functions.main())
-            functions.save_df_list_to_xlsx('teste.xlsx', list_df_all_cnpj_details)
-            functions.organize_sheet('teste.xlsx')
+
+            file_name = self.file_entry_var.get()
+            print(file_name)
+
+            if self.file_type_var.get() == 'xlsx':
+                functions.save_df_list_to_xlsx(file_name, list_df_all_cnpj_details)
+                functions.organize_sheet(file_name)
+            else:
+                pandas.concat(list_df_all_cnpj_details).to_csv(file_name, index=False)
             list_df_all_cnpj_details.clear()
             self.button_buscar_empresas.configure(state='normal')
             print("--- %s seconds ---" % (time.time() - start_time))
 
         start_thread(buscar)
         
+
+
     def button_callback2(self):
         functions = Functions(self)
 
@@ -664,8 +721,8 @@ class App(customtkinter.CTk):
             'uf': [] if self.filters_frame.combobox_estados_var.get() == 'Todos Estados' else [self.filters_frame.combobox_estados_var.get()],
             'municipio': [] if self.filters_frame.combobox_municipios_var.get() == 'Todos Municipios' else [self.filters_frame.combobox_municipios_var.get()],
             'situacao_cadastral':'ATIVA',
-            'cep': [],
-            'ddd': []
+            'cep': [] if self.filters_frame.entry_CEP.get() == '' else [self.filters_frame.entry_CEP.get()],
+            'ddd': [] if self.filters_frame.entry_DDD.get() == '' else [self.filters_frame.entry_DDD.get()],
             }, 
         'range_query':{
             'data_abertura':{
