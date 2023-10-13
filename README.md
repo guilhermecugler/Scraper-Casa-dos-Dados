@@ -14,7 +14,7 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão feitas:
 
-- [x] Requests assíncrono
+- [x] Requests assíncronos
 - [x] Interface amigável
 - [ ] Salvar filtros
 - [x] Salvar em outros formatos(.csv etc)
