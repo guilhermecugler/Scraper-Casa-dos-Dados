@@ -62,3 +62,35 @@ To contribute, follow these steps:
 5. Create a pull request
 
 Alternatively, consult the GitHub documentation on [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## 🤝 Collaborators
+
+The project is being maintained by me and timotheeMM.
+
+<div style="display: flex;">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="#">
+          <img src="https://avatars3.githubusercontent.com/u/47875525" width="100px;" alt="Iuri Silva's GitHub photo"/><br>
+          <sub>
+            <b>Guilherme Cugler</b>
+          </sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td align="center">
+        <a href="#">
+          <img src="https://avatars3.githubusercontent.com/u/143833750" width="100px;" alt="timotheeMM's GitHub photo"/><br>
+          <sub>
+            <b>timotheeMM</b>
+          </sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>

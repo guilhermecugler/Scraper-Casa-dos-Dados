@@ -66,20 +66,35 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
 
 ## 🤝 Colaboradores
 
-Até o momento o projeto é mantido somente por mim.
+O projeto está a ser mantido por mim e pelo timotheeMM.
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://avatars3.githubusercontent.com/u/47875525" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
-        <sub>
-          <b>Guilherme Cugler</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+<div style="display: flex;">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="#">
+          <img src="https://avatars3.githubusercontent.com/u/47875525" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+          <sub>
+            <b>Guilherme Cugler</b>
+          </sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td align="center">
+        <a href="#">
+          <img src="https://avatars3.githubusercontent.com/u/143833750" width="100px;" alt="Foto do timotheeMM no GitHub"/><br>
+          <sub>
+            <b>timotheeMM</b>
+          </sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## 😄 Seja um dos contribuidores
 
