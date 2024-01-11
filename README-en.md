@@ -27,3 +27,19 @@ Before you start, make sure you meet the following requirements:
 
 * You have installed `Python 3.11` or the latest version.
 * You have a machine running Windows 10 or higher.
+
+## 🚀 Installing
+
+To install, follow these steps:
+
+Windows:
+1. Clone this repository:
+```
+git clone https://github.com/guilhermecugler/Scraper-Casa-dos-Dados.git
+```
+2. Navigate to the cloned folder
+
+3. Install the dependencies:
+```
+pip install -r .\requirements.txt
+```
