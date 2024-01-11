@@ -20,3 +20,10 @@ The project is still under development and the next updates will be :
 - [x] Save in other formats (.csv...)
 - [ ] Generate installer
 - [ ] Generate portable executable
+
+## 💻 Prerequisites
+
+Before you start, make sure you meet the following requirements:
+
+* You have installed `Python 3.11` or the latest version.
+* You have a machine running Windows 10 or higher.
