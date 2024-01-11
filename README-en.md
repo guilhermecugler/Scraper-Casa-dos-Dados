@@ -71,7 +71,7 @@ The project is being maintained by me and timotheeMM.
   <table>
     <tr>
       <td align="center">
-        <a href="#">
+        <a href="https://github.com/guilhermecugler">
           <img src="https://avatars3.githubusercontent.com/u/47875525" width="100px;" alt="Iuri Silva's GitHub photo"/><br>
           <sub>
             <b>Guilherme Cugler</b>
@@ -84,7 +84,7 @@ The project is being maintained by me and timotheeMM.
   <table>
     <tr>
       <td align="center">
-        <a href="#">
+        <a href="https://github.com/timotheeMM">
           <img src="https://avatars3.githubusercontent.com/u/143833750" width="100px;" alt="timotheeMM's GitHub photo"/><br>
           <sub>
             <b>timotheeMM</b>
