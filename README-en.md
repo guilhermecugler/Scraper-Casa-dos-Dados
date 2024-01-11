@@ -7,3 +7,5 @@
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 
 <img src="/images/preview.png" alt="Preview">
+
+> Scraper with user-friendly interface to retrieve data from the [casadosdados website](https://casadosdados.com.br/) using asynchronous functions, returning 1000 results in about 1 minute.
