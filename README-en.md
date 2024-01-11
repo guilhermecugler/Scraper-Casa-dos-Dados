@@ -95,6 +95,10 @@ The project is being maintained by me and timotheeMM.
   </table>
 </div>
 
+## Become a contributor
+
+If you contribute to the project, add your GitHub username to the CONTRIBUTORS.md file.
+
 ## 📝 License
 
 This project is licensed under the GNU General Public License v3.0. See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html) for more details.

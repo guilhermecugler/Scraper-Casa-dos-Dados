@@ -98,6 +98,8 @@ O projeto está a ser mantido por mim e pelo timotheeMM.
 
 ## 😄 Seja um dos contribuidores
 
+Se estiver contribuindo com o projeto, adicione seu nome de usuário do GitHub ao arquivo CONTRIBUTORS.md.
+
 ## 📝 Licença
 
 Esse projeto está sob licença GNU General Public License v3.0. Veja [LICENÇA](https://www.gnu.org/licenses/gpl-3.0.en.html) para mais detalhes.
