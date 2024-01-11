@@ -43,3 +43,10 @@ git clone https://github.com/guilhermecugler/Scraper-Casa-dos-Dados.git
 ```
 pip install -r .\requirements.txt
 ```
+
+## ☕ Using
+
+To use the project, follow these steps:
+
+1. Go to the project folder containing casadosdados.py
+2. Run with: ```python .\casadosdados.py```
