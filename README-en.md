@@ -9,3 +9,14 @@
 <img src="/images/preview.png" alt="Preview">
 
 > Scraper with user-friendly interface to retrieve data from the [casadosdados website](https://casadosdados.com.br/) using asynchronous functions, returning 1000 results in about 1 minute.
+
+### Adjustments and improvements
+
+The project is still under development and the next updates will be :
+
+- [x] Asynchronous requests
+- [x] User-friendly interface
+- [ ] Save filters
+- [x] Save in other formats (.csv...)
+- [ ] Generate installer
+- [ ] Generate portable executable
