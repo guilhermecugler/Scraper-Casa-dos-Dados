@@ -6,7 +6,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 
-<img src="/images/preview.png" alt="Preview">
+<img src="/images/preview.png" alt="Preview da interface">
 
 > Scraper com interface amigável para pegar os dados do site casadosdados utlizando funções assincronas retornando 1000 resultados em aproximadamente 1 minuto.
 
