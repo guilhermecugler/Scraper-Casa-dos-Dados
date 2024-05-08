@@ -855,8 +855,8 @@ class App(customtkinter.CTk):
                 }, 
             'range_query':{
                 'data_abertura':{
-                    'lte': None if self.filters_frame.entry_data_inicial.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_inicial.get(), '%d/%m/%Y'), '%Y-%m-%d'),
-                    'gte': None if self.filters_frame.entry_data_final.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_final.get(), '%d/%m/%Y'), '%Y-%m-%d'),
+                    'lte': None if self.filters_frame.entry_data_final.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_final.get(), '%d/%m/%Y'), '%Y-%m-%d'),
+                    'gte': None if self.filters_frame.entry_data_inicial.get() == '' else datetime.strftime(datetime.strptime(self.filters_frame.entry_data_inicial.get(), '%d/%m/%Y'), '%Y-%m-%d'),
                 }
             },
             'extras':{
