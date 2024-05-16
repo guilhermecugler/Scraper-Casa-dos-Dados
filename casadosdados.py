@@ -166,6 +166,7 @@ class Functions:
 
 
     async def get_cnpj_details(self, url):
+            print(url)
             
             if stop_event.is_set():
                 return 
@@ -190,31 +191,15 @@ class Functions:
                         soup = BeautifulSoup(html, 'html.parser')
                         # soup = BeautifulSoup(response.content, 'html.parser') # httpx
 
-                        cnpj_all_details_raw = soup.find_all('div', class_='column is-narrow')
+                        # cnpj_all_details_raw = soup.find_all('div', class_='column is-narrow')
                         cnpj_all_details = []
                         dict_cnpj_details = {}
+                        cnpj_all_details_raw = soup.find_all('label')
 
-                        for i, e in enumerate(cnpj_all_details_raw):
-
-                            cnpj_all_details_raw = soup.find_all('div', class_='column is-narrow')[i]
-
-                            for p in cnpj_all_details_raw.find_all('p'):
-                                if len(cnpj_all_details_raw.find_all('p')) == 2:
-                                    cnpj_all_details.append(p.text)
-
-                            dict_cnpj_details = self.convert_list_to_dict(cnpj_all_details)
-
-                            municipio = dict_cnpj_details.get('Município')
-                            uf = dict_cnpj_details.get('UF')
-
-                            if municipio != None:
-                                municipio_formatted = {'Município': municipio.strip()}
-                                dict_cnpj_details.update(municipio_formatted)
-                                
-                            if uf != None:
-                                uf_formatted = {'UF': uf.strip()}
-                                dict_cnpj_details.update(uf_formatted)
-
+                        for i, label in enumerate(cnpj_all_details_raw):
+                            if i == 0:
+                                continue
+                            dict_cnpj_details[label.text.replace(":", "")] = label.find_next("p").text
 
                         df_cnpj_details = pandas.DataFrame(data=dict_cnpj_details, index=[1])
                         global progress_step
