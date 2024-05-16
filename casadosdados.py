@@ -197,6 +197,8 @@ class Functions:
                         for i, label in enumerate(cnpj_all_details_raw):
                             if i == 0:
                                 continue
+                            if label.find_next().name != "p":
+                                continue
                             dict_cnpj_details[label.text.replace(":", "")] = label.find_next("p").text
 
                         df_cnpj_details = pandas.DataFrame(data=dict_cnpj_details, index=[1])
