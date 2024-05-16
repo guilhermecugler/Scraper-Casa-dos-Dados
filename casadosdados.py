@@ -166,8 +166,6 @@ class Functions:
 
 
     async def get_cnpj_details(self, url):
-            print(url)
-            
             if stop_event.is_set():
                 return 
                 
@@ -913,7 +911,7 @@ class App(customtkinter.CTk):
 
 
             file_name = self.file_entry_var.get()
-            print(file_name)
+            # print(file_name)
 
             if self.file_type_var.get() == 'xlsx':
                 functions.save_df_list_to_xlsx(file_name, list_df_all_cnpj_details)
@@ -931,7 +929,7 @@ class App(customtkinter.CTk):
             
             print("--- %s seconds ---" % (time.time() - start_time))
             teste = enumt()
-            print(teste)
+            # print(teste)
         
 
         start_thread(buscar)
@@ -974,7 +972,7 @@ class App(customtkinter.CTk):
         'somente_filial':self.filters_frame.check_somente_filial_var.get()
     },})
         
-        print(functions.json_filters)
+        # print(functions.json_filters)
         
     def change_appearance_mode_event(self, new_appearance_mode):
         if new_appearance_mode == "Escuro": new_appearance_mode = "Dark"
