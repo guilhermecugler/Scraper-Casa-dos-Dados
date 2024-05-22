@@ -1,3 +1,4 @@
+# ⚠️ O site casa dos dados está realizando alterações neste mês(05/2024) e o projeto será atualizado assim que terminarem⚠️
 # Scraper Casa dos Dados
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
