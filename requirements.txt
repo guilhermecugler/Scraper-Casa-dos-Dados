@@ -1,6 +1,5 @@
 aiohttp==3.9.5
 aiosignal==1.3.1
-anyio==4.3.0
 attrs==23.2.0
 beautifulsoup4==4.12.3
 certifi==2024.2.2
@@ -9,9 +8,7 @@ customtkinter==5.2.2
 darkdetect==0.8.0
 et-xmlfile==1.1.0
 frozenlist==1.4.1
-h11==0.14.0
-httpcore==1.0.5
-httpx==0.27.0
+greenlet==3.0.3
 idna==3.7
 multidict==6.0.5
 numpy==1.26.4
@@ -19,15 +16,14 @@ openpyxl==3.1.2
 packaging==24.0
 pandas==2.2.2
 pillow==10.3.0
+playwright==1.44.0
+pyee==11.1.0
 python-dateutil==2.9.0.post0
 pytz==2024.1
-requests==2.31.0
-setuptools==69.5.1
-sheet2dict==0.1.5
+requests==2.32.2
 six==1.16.0
-sniffio==1.3.1
 soupsieve==2.5
+typing_extensions==4.12.0
 tzdata==2024.1
 urllib3==2.2.1
-XlsxWriter==3.2.0
 yarl==1.9.4

@@ -1,4 +1,3 @@
-# ⚠️ O site casa dos dados está realizando alterações neste mês(05/2024) e o projeto será atualizado assim que terminarem⚠️
 # Scraper Casa dos Dados
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
@@ -7,7 +6,10 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 
-<img src="/images/preview.png" alt="Preview da interface">
+
+> ⚠️ Devido a mudanças no site Casa dos Dados, que agora usa uma proteção da Cloudflare para bloquear scrapers e crawlers, tivemos que mudar nossa abordagem. Agora, usamos o Playwright para buscar os primeiros filtros.
+
+<img src="preview.png" alt="Preview da interface">
 
 > Scraper com interface amigável para pegar os dados do site casadosdados utlizando funções assincronas retornando 1000 resultados em aproximadamente 1 minuto.
 
@@ -31,8 +33,18 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 ## 🚀 Instalando
 
+
+
 Para instalar, siga estas etapas:
 
+ - Visite a página de [releases](https://github.com/guilhermecugler/Scraper-Casa-dos-Dados/releases/) do repositório
+ - Escolha a versão mais [recente](https://github.com/guilhermecugler/Scraper-Casa-dos-Dados/releases/latest) 
+ - Escolha a versão portável ou a instalável(essa versão abre mais rápido)
+ - Abra e utilize normalmente
+
+
+
+## 🖥️ Executando do Código Fonte
 Windows:
 ```
 1. Clone este repositório:
