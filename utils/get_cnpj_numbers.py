@@ -1,5 +1,5 @@
 import math
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 import asyncio
 from utils.exceptions import NoneError, ApiError
 
@@ -41,17 +41,19 @@ json_data = {
     'page': 1,
 }
 
+
 def create_evaluate_request_string(json):
     """
     Converte objeto json python em json javascript
 
     Args:
         json: Objeto json em python
-    
+
     Returns:
         String json no formato de javascript
     """
-    json_filters = str(json).replace("None", "null").replace("False", "false").replace("True", "true")
+    json_filters = str(json).replace("None", "null").replace(
+        "False", "false").replace("True", "true")
 
     evaluate_request = """
     async () => {
@@ -69,6 +71,7 @@ def create_evaluate_request_string(json):
 
     return evaluate_request
 
+
 def calculate_page_count(cnpj_count):
     """
     Retorna a quantidade de páginas a partir do número de CNPJs
@@ -80,15 +83,18 @@ def calculate_page_count(cnpj_count):
         Int com a quantidade de páginas
     """
     page_count = 1
-    if cnpj_count < 1000 and cnpj_count > 20 : page_count = math.ceil(cnpj_count / 20)
-    elif cnpj_count > 1000 : page_count = 50
+    if cnpj_count < 1000 and cnpj_count > 20:
+        page_count = math.ceil(cnpj_count / 20)
+    elif cnpj_count > 1000:
+        page_count = 50
 
     return page_count
+
 
 async def get_cnpj_numbers(playwright, json_filters, progressbar, status_update, cancel):
     """
     Obtém uma lista dos CNPJS de acordo com o filtro.
-    
+
     Args:
         playwright: Classe Página do Playwright.
         json_filters: Json com os filtros a serem buscados.
@@ -98,65 +104,86 @@ async def get_cnpj_numbers(playwright, json_filters, progressbar, status_update,
     """
 
     evaluate_request = create_evaluate_request_string(json_filters)
+    attempts = 0
+    max_attempts = 2
+    lista_cnpjs = []
 
-    browser = await playwright.chromium.launch(headless=False, args=["--start-minimized"])
-    try:
-        context = await browser.new_context(
-            viewport={"width": 100, "height": 100},  # Reduz a resolução da tela
-            permissions=['geolocation'], # Define permissões específicas
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.0 Safari/537.36",
-        )
+    while attempts < max_attempts:
+        browser = await playwright.chromium.launch(headless=False, args=["--start-minimized"])
+        try:
+            context = await browser.new_context(
+                # Reduz a resolução da tela
+                viewport={"width": 100, "height": 100},
+                permissions=['geolocation'],  # Define permissões específicas
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.0 Safari/537.36",
+            )
 
-        # Desativa as animações
-        await context.add_init_script(evaluate_request)
+            # Desativa as animações
+            await context.add_init_script(evaluate_request)
 
-        page = await context.new_page()
-        
+            page = await context.new_page()
 
-        await page.goto("https://casadosdados.com.br/solucao/cnpj/pesquisa-avancada/")
-        # await page.wait_for_selector("//head")
+            await page.goto("https://casadosdados.com.br/solucao/cnpj/pesquisa-avancada/")
+            response_cnpj_count = await page.evaluate(evaluate_request)
+            # print(response_cnpj_count)
 
-        response_cnpj_count = await page.evaluate(evaluate_request)
-        print(response_cnpj_count)
+            if not response_cnpj_count['success']:
+                raise ApiError(response_cnpj_count["message"])
 
-        if not response_cnpj_count['success']:
-            raise  ApiError(response_cnpj_count["message"])
-        
-        cnpj_count = response_cnpj_count['data']['count']
+            cnpj_count = response_cnpj_count['data']['count']
 
-        if cnpj_count == 0:
-            raise NoneError()
-        
-        page_count = calculate_page_count(cnpj_count)
+            if cnpj_count == 0:
+                raise NoneError()
 
-        evaluate_request= evaluate_request.replace("'page': 1", "'page': numero_pagina")
-        for i in range(page_count):
-            if cancel.is_set():
-                return
-            try:
-                # Executar o JavaScript para fazer uma requisição para a API
-                response = await page.evaluate(evaluate_request.replace("numero_pagina", str(i+1)))
+            page_count = calculate_page_count(cnpj_count)
 
-                lista_cnpjs_pagina = [empresa['cnpj'] for empresa in response['data']['cnpj']]
-                lista_cnpjs.extend(lista_cnpjs_pagina)
-                # print(f"Lista de CNPJs (página {i+1}):", lista_cnpjs_pagina)
-                # print(f"Página atual {response['page']['current']}")
-                step = i / page_count
-                status_update(text=f"Calculando quantidade aproximada de CNPJs...({len(set(lista_cnpjs))})")
-                progressbar(step)
-            except Exception as e:
-                print(e)
-                continue
-    finally:
-        await browser.close() #Fecha o browser mesmo se tiver alguma exceção
-    
+            evaluate_request = evaluate_request.replace(
+                "'page': 1", "'page': numero_pagina")
+            for i in range(page_count):
+                if cancel.is_set():
+                    return
+                try:
+                    # Executar o JavaScript para fazer uma requisição para a API
+                    response = await page.evaluate(evaluate_request.replace("numero_pagina", str(i + 1)))
+
+                    lista_cnpjs_pagina = [empresa['cnpj']
+                                          for empresa in response['data']['cnpj']]
+                    lista_cnpjs.extend(lista_cnpjs_pagina)
+
+                    step = i / page_count
+                    status_update(
+                        text=f"Calculando quantidade aproximada de CNPJs...({len(set(lista_cnpjs))})")
+                    progressbar(step)
+                except Exception as e:
+                    print(e)
+                    continue
+
+            # Se chegamos aqui, a tentativa foi bem-sucedida, podemos sair do loop
+            break
+        except PlaywrightTimeoutError as e:
+            attempts += 1
+            status_update(text=f"Tempo excedido, tentativa {attempts} de {
+                          max_attempts}. Tentando novamente...")
+            print(f"Timeout occurred. Attempt {
+                  attempts} of {max_attempts}. Retrying...")
+            await browser.close()  # Fecha o browser antes de tentar novamente
+        except Exception as e:
+            status_update(text=f"Erro ao buscar número de CNPJs: {e}")
+            print(f"Erro ao buscar número de CNPJs: {e}")
+            await browser.close()  # Fecha o browser em caso de outras exceções
+            break
+        finally:
+            await browser.close()  # Garante que o browser será fechado
+
     return lista_cnpjs
+
 
 async def get_cnpj_numbers_async(json_data, progressbar, status_update, cancel):
     async with async_playwright() as playwright:
-        await get_cnpj_numbers(playwright, json_data, progressbar, status_update, cancel)
+        lista_cnpjs = await get_cnpj_numbers(playwright, json_data, progressbar, status_update, cancel)
 
     cnpjs = list(set(lista_cnpjs))
+
     return cnpjs
 
 

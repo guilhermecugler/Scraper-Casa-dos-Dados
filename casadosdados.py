@@ -7,11 +7,10 @@ from screens.main import App
 # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
-
 def main():
-    # Inicializa a tela principal
     app = App()
     app.mainloop()
+
 
 if __name__ == "__main__":
     main()

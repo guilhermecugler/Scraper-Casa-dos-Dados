@@ -295,7 +295,7 @@ class App(ctk.CTk):
         y = (screen_height / 2) - (self.height / 2)
 
         self.title("Casa dos Dados")
-        self.geometry('%dx%d+%d+%d' % (self.width, self.height, x, y-30))
+        self.geometry('%dx%d+%d+%d' % (self.width, self.height, x, y - 30))
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(2, weight=1)
         self.resizable(width=False, height=False)
@@ -393,11 +393,11 @@ class App(ctk.CTk):
         return directory
 
     def button_aumentar_buscas_callback(self):
-        novo_valor = self.entry_quantidade_buscas_var.get()+1
+        novo_valor = self.entry_quantidade_buscas_var.get() + 1
         self.entry_quantidade_buscas_var.set(novo_valor)
 
     def button_diminuir_buscas_callback(self):
-        novo_valor = self.entry_quantidade_buscas_var.get()-1
+        novo_valor = self.entry_quantidade_buscas_var.get() - 1
         if novo_valor < 1:
             self.entry_quantidade_buscas_var.set(1)
         else:
@@ -434,21 +434,13 @@ class App(ctk.CTk):
         if cancel.is_set():
             self.button_buscar_empresas.configure(state='normal')
             return
-        # report all tasks
-        # global stop_flag
-        # stop_flag = True
-
-        # tasks = asyncio.all_tasks()
-        # print("CLICOU CANCELAR")
-        # for task in tasks:
-            # print(task.get_name)
 
     def button_aumentar_buscas_callback(self):
-        novo_valor = self.entry_quantidade_buscas_var.get()+1
+        novo_valor = self.entry_quantidade_buscas_var.get() + 1
         self.entry_quantidade_buscas_var.set(novo_valor)
 
     def button_diminuir_buscas_callback(self):
-        novo_valor = self.entry_quantidade_buscas_var.get()-1
+        novo_valor = self.entry_quantidade_buscas_var.get() - 1
         if novo_valor < 1:
             self.entry_quantidade_buscas_var.set(1)
         else:
@@ -520,7 +512,6 @@ class App(ctk.CTk):
                         return
                     cnpjs = asyncio.run(get_cnpj_numbers_async(
                         json_filters, self.progress_bar_update, self.status_update, cancel))
-
             except exceptions.NoneError as e:
                 App.status_update(self, text=e.message)
                 self.button_buscar_empresas.configure(state='normal')
@@ -530,7 +521,6 @@ class App(ctk.CTk):
             self.progress_bar.stop()
             self.progress_bar.configure(mode="determinate")
 
-            cnpjs = list(set(cnpjs))  # Remove duplicados
             if cancel.is_set():
                 return
             App.status_update(self, text=f"Encontrados {
@@ -542,7 +532,7 @@ class App(ctk.CTk):
             if cancel.is_set():
                 return
 
-            dados_cnpjs = asyncio.run(get_cnpj_data_async(
+            quantidade_cnpj_salvo = asyncio.run(get_cnpj_data_async(
                 cnpjs, file_name, self.status_update, cancel))
 
             # if self.file_type_var.get() == 'xlsx':
@@ -560,19 +550,14 @@ class App(ctk.CTk):
             self.button_cancelar.configure(state='disabled')
 
             cnpjs.clear()
-            print("--- %s seconds ---" % (time.time() - start_time))
+            tempo = "%s segundos" % int((time.time() - start_time))
             self.progress_bar.set(1)
-
-            teste = enumt()
-            # print(teste)
+            App.status_update(self, f"Finalizado... salvos {quantidade_cnpj_salvo} CNPJ(s) em {tempo}")
 
         start_thread(buscar)
         if cancel.is_set():
             App.status_update(self, text="Cancelado com sucesso!")
             return
-
-        teste = enumt()
-        # print(teste)
 
     def change_appearance_mode_event(self, new_appearance_mode):
         if new_appearance_mode == "Escuro":
