@@ -1,4 +1,5 @@
 # Scraper Casa dos Dados
+![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/guilhermecugler/Scraper-Casa-dos-Dados&title=View%20Count)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
