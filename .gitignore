@@ -164,3 +164,4 @@ assinar_executavel.txt
 *.xlsx
 certificate.pfx
 *.exe
+.vscode

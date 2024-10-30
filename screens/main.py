@@ -1,3 +1,6 @@
+# Autor: Guilherme Cugler https://github.com/guilhermecugler
+# Data: 2024-29-10
+# Descrição: Scraper do site casa dos dados
 import asyncio
 import customtkinter as ctk
 import os
@@ -272,12 +275,6 @@ class FiltersFrame(ctk.CTkFrame):
         self.entry_data_final.grid(
             row=8, column=2, padx=10, pady=10, sticky='ew')
 
-    def button_buscar_callback(self):
-        cnpjs = ["55102193000183", "55015814000191", "55076151000115", "55037548000106", "55083185000137", "55078462000113",
-                 "55070390000168", "55069481000183", "55126786000180", "55052180000147", "55124811000196", "55070518000193"]
-        asyncio.run(get_cnpj_data_async(cnpjs))
-
-
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
@@ -456,6 +453,7 @@ class App(ctk.CTk):
             json_filters.update(
                 {
                     'query': {
+                        # 'situacao_cadastral': 'ATIVA',
                         'termo': [] if self.filters_frame.entry_termo.get() == '' else [self.filters_frame.entry_termo.get()],
                         'atividade_principal': [] if self.filters_frame.cnae_code_var.get() == '' else [self.filters_frame.cnae_code_var.get()],
                         'natureza_juridica': [],
@@ -532,8 +530,8 @@ class App(ctk.CTk):
             if cancel.is_set():
                 return
 
-            quantidade_cnpj_salvo = asyncio.run(get_cnpj_data_async(
-                cnpjs, file_name, self.status_update, cancel))
+            quantidade_cnpj_salvo = len(asyncio.run(get_cnpj_data_async(
+                cnpjs, file_name, self.status_update, cancel)))
 
             # if self.file_type_var.get() == 'xlsx':
             #     save_excel(dados_cnpjs, file_name)

@@ -1,11 +1,11 @@
+# Autor: Guilherme Cugler https://github.com/guilhermecugler
+# Data: 2024-29-10
+# Descrição: Scraper do site casa dos dados
+
 import sys
 import os
 import customtkinter as ctk
 from screens.main import App
-
-# Adiciona o diretório principal ao sys.path para permitir importações
-# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 
 def main():
     app = App()
