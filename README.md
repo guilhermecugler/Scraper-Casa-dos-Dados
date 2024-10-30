@@ -7,6 +7,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/guilhermecugler/Scraper-Casa-dos-Dados?style=for-the-badge)
 
+⚠️⚠️⚠️ No momento devido a atualizações do site Casa dos Dados o scraper está sendo atualizado e encontra-se infuncional.⚠️⚠️⚠️
 
 > ⚠️ Devido a mudanças no site Casa dos Dados, que agora usa uma proteção da Cloudflare para bloquear scrapers e crawlers, tivemos que mudar nossa abordagem. Agora, usamos o Playwright para buscar os primeiros filtros.
 
